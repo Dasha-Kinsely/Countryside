@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Dasha-Kinsely/Countryside/controllers"
+	"github.com/Dasha-Kinsely/Countryside/logs"
 	"github.com/Dasha-Kinsely/Countryside/services"
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +15,10 @@ var (
 )
 
 func main() {
-	server := gin.Default()
+	server := gin.New()
+	logs.setupLogOutput()
+	server.Use(gin.Recovery(), logs.HTTPLogger())
+
 	server.GET("/test/init", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"msg": "ok",
