@@ -2,7 +2,7 @@ package configs
 
 import (
 	"github.com/Dasha-Kinsely/Countryside/entities"
-	//_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 

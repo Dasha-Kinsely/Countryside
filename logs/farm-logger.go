@@ -22,8 +22,8 @@ func HTTPLogger() gin.HandlerFunc {
 	})
 }
 
+// Initialization Errors
 func ErrorLogger(errorSpec string) gin.HandlerFunc {
-	setup("e")
 	return gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 		return fmt.Sprintf(
 			"ERROR: %s\n", errorSpec)
