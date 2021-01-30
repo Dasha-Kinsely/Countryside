@@ -1,0 +1,14 @@
+[GIN-debug] GET    /test/init                --> main.main.func1 (3 handlers)
+[GIN-debug] GET    /farms                    --> main.main.func2 (3 handlers)
+[GIN-debug] POST   /farms                    --> main.main.func3 (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+CLIENT: ::1 - [29 Jan 21 15:23 PST]
+ PATH: /farms -> GET -> 244.29µs -> 200
+CLIENT: ::1 - [29 Jan 21 15:24 PST]
+ PATH: /farms -> POST -> 232.102µs -> 400
+CLIENT: ::1 - [29 Jan 21 15:24 PST]
+ PATH: /farms -> POST -> 101.6µs -> 200
+CLIENT: ::1 - [29 Jan 21 15:25 PST]
+ PATH: /farms -> GET -> 47.575µs -> 200
+CLIENT: ::1 - [29 Jan 21 15:29 PST]
+ PATH: /farms -> POST -> 141.66µs -> 200

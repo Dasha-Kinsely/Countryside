@@ -7,7 +7,7 @@ import (
 )
 
 type FarmController interface {
-	Save(ctx *gin.Context) entities.Farm
+	Save(ctx *gin.Context) error
 	FindAll() []entities.Farm
 }
 type controller struct {
@@ -23,9 +23,12 @@ func New(service services.FarmService) FarmController {
 func (c *controller) FindAll() []entities.Farm {
 	return c.service.FindAll()
 }
-func (c *controller) Save(ctx *gin.Context) entities.Farm {
+func (c *controller) Save(ctx *gin.Context) error {
 	var farm entities.Farm
-	ctx.BindJSON(&farm)
+	err := ctx.ShouldBindJSON(&farm)
+	if err != nil {
+		return err
+	}
 	c.service.Save(farm)
-	return farm
+	return nil
 }
