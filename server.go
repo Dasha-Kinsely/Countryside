@@ -16,17 +16,23 @@ var (
 )
 
 func main() {
+	// Init Gin Server
 	server := gin.New()
+	gin.SetMode(gin.DebugMode)
+	// Init Logger Middlewares
 	server.Use(gin.Recovery(), logs.HTTPLogger())
-	db, initDBErr := configs.initDB()
+	// Init DB using Primitive Methods
+	db, initDBErr := configs.InitDB()
 	if initDBErr != nil {
-
+		logs.ErrorLogger("db failed")
+		return
 	}
-	server.GET("/test/init", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"msg": "ok",
-		})
-	})
+	defer db.Close()
+	// Init Router with Configs
+	router := gin.Default()
+	configs.SetTemplate(router)
+	configs.SetSession(router)
+
 	server.GET("/farms", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, farmController.FindAll())
 	})
@@ -38,9 +44,6 @@ func main() {
 			ctx.JSON(http.StatusOK, gin.H{"message": "valid input"})
 		}
 	})
-	/*server.POST("/binder", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, )
-	})*/
 
 	server.Run(":8080")
 }
