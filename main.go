@@ -20,6 +20,6 @@ func main() {
 	}
 	defer db.Close()
 	// Main Operations on the Server & Router & Wrapper
-	routes.RunRouter(server)
+	routes.RunRouter(server, db)
 	server.Run("localhost:8082")
 }
