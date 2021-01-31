@@ -10,7 +10,6 @@ type UserRepository interface {
 	UpdateUser(user entities.User)
 	DeleteUser(user entities.User)
 	FinalAllUsers() []entities.User
-	CloseDBUser()
 }
 
 func (db *database) SaveUser(user entities.User) {
@@ -29,11 +28,4 @@ func (db *database) FindAllUsers() []entities.User {
 	var user []entities.User
 	db.connection.Set("gorm:auto_preload", true).Find(&user)
 	return user
-}
-
-func (db *database) CloseDBUser() {
-	err := db.connection.Close()
-	if err != nil {
-		panic("failed to close db")
-	}
 }

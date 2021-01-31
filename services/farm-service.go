@@ -31,7 +31,7 @@ func (service *farmService) Save(farm entities.Farm) entities.Farm {
 }
 
 func (service *farmService) FindAll() []entities.Farm {
-	return service.farmRepo.FinalAllFarms()
+	return service.farmRepo.FindAllFarms()
 }
 
 func (service *farmService) Update(farm entities.Farm) {

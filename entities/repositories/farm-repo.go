@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/Dasha-Kinsely/Countryside/entities"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
@@ -9,8 +10,22 @@ type FarmRepository interface {
 	SaveFarm(farm entities.Farm)
 	UpdateFarm(farm entities.Farm)
 	DeleteFarm(farm entities.Farm)
-	FinalAllFarms() []entities.Farm
+	FindAllFarms() []entities.Farm
 	CloseDBFarm()
+}
+type database struct {
+	connection *gorm.DB
+}
+
+func NewFarmRepository() FarmRepository {
+	db, err := gorm.Open("mysql", "yuntai:dkemployeeaccess@tcp(localhost:3306)/masterdb?charset=utf8&parseTime=True&loc=Local")
+	if err != nil {
+		panic("failed to open")
+	}
+	db.AutoMigrate(&entities.Farm{}, &entities.User{})
+	return &database{
+		connection: db,
+	}
 }
 
 func (db *database) SaveFarm(farm entities.Farm) {

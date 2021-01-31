@@ -1,7 +1,6 @@
 package entities
 
 type Farm struct {
-	Base
 	ID          uint64 `json:"id" binding:"required" gorm:"primary_key;auto_increment"`
 	URL         string `json:"url" binding:"required,url" gorm:"type:varchar(255);UNIQUE"`
 	Name        string `json:"name" binding:"required,min=2,max=50" gorm:"type:varchar(155)"`
