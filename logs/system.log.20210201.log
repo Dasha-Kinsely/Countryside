@@ -1,0 +1,2 @@
+{"client_ip":"::1","latency_time":236452,"level":"info","msg":"","req_method":"GET","req_uri":"/sign","status_code":200,"time":"2021-02-01T20:25:37-08:00"}
+{"client_ip":"::1","latency_time":83370,"level":"info","msg":"","req_method":"GET","req_uri":"/farm/add?name=yisw\u0026ts=0","status_code":200,"time":"2021-02-01T20:26:20-08:00"}
