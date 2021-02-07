@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	db := configs.Init()
+	configs.LoadEnv()
+	db := configs.InitDB()
 	configs.MigrateDB()
 	defer db.Close()
 	server := gin.Default()
